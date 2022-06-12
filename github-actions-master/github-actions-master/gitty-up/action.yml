@@ -1,0 +1,27 @@
+name: 'Gitty Up'
+description: 'Run gitty-up'
+inputs:
+  url:
+    description: 'URL of git repo to push a change to'
+    required: true
+  username:
+    description: 'Username for pushing to url'
+    required: true
+  password:
+    description: 'Password for pushing to url'
+    required: true
+  file:
+    description: 'Path to file that needs to be updated'
+    required: true
+  values:
+    description: 'Values to apply to repo-file'
+    required: true
+runs:
+  using: 'docker'
+  image: 'docker://liatrio/gitty-up:0.1.4'
+  env:
+    GITOPS_GIT_URL: ${{ inputs.url }}
+    GITOPS_GIT_USERNAME: ${{ inputs.username }}
+    GITOPS_GIT_PASSWORD: ${{ inputs.password }}
+    GITOPS_REPO_FILE: ${{ inputs.file }}
+    GITOPS_VALUES: ${{ inputs.values }}
